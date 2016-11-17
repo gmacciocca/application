@@ -1,0 +1,56 @@
+{
+  "version": "0.1.1",
+  "name": "solo-application",
+  "description": "Single Page Application Kit.",
+  "keywords": [
+    "single",
+    "single page",
+    "application",
+    "application kit"
+  ],
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "prepublish": "npm run build",
+    "build": "npm run lint && npm run test && npm run _build",
+    "_build": "babel src --source-maps --out-dir lib",
+    "test": "mocha test --recursive",
+    "watch:test": "nodemon -w test -w ./src -e js -x npm test",
+    "travis-script": "npm run build"
+  },
+  "author": {
+    "name": "Gianluca Macciocca",
+    "email": "gianlucam@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "es6-promise": "^4.0.5",
+    "honest-error": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-es6-promise": "^1.0.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "babelify": "^7.3.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "chai-spies": "^0.7.1",
+    "del": "^2.2.2",
+    "eslint": "^3.8.1",
+    "mocha": "^3.1.2",
+    "nodemon": "^1.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gmacciocca/sp-application.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gmacciocca/sp-application/issues"
+  },
+  "homepage": "https://github.com/gmacciocca/sp-application",
+  "readmeFilename": "README.md",
+  "readme": "#hello!\n"
+}
