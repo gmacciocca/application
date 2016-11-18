@@ -87,6 +87,10 @@ export default class Application {
         return Application.instance().stores;
     }
 
+    static get roles() {
+        return Application.instance().roles;
+    }
+
     static get configuration() {
         return Application.instance().configuration();
     }
