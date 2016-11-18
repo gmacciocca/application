@@ -14,13 +14,15 @@ export default class Application {
         this._lifecycle = Factory.createLifecycle(delegates, components);
         this._localize = null;
         this._storage = null;
+        this._dependenciesRoles = null;
     }
 
     bootstrap() {
         return this._lifecycle.bootstrap()
             .then(dependenciesRoles => {
-                this._localize = dependenciesRoles.localize;
-                this._storage = dependenciesRoles.storage;
+                this._dependenciesRoles = dependenciesRoles;
+                this._localize = this._dependenciesRoles.localize;
+                this._storage = this._dependenciesRoles.storage;
             });
     }
 
@@ -42,6 +44,10 @@ export default class Application {
 
     get configuration() {
         return this._configuration;
+    }
+
+    get roles() {
+        return this._dependenciesRoles;
     }
 
     static create(...args) {
