@@ -1,18 +1,17 @@
-import AppError from "./AppError";
-import Lifecycle from "./Lifecycle";
+import Factory from "./Factory";
 
 let _instance;
 
 export default class Application {
     constructor(delegates, components, configuration) {
         if (_instance) {
-            throw new AppError("APP.ALREADY_INSTANTIATED", {
+            throw Factory.createAppError("APP.ALREADY_INSTANTIATED", {
                 message: "Application constructor: App is already instantiated."
             });
         }
         _instance = this;
         this._configuration = configuration;
-        this._lifecycle = new Lifecycle(delegates, components);
+        this._lifecycle = Factory.createLifecycle(delegates, components);
         this._localize = null;
         this._storage = null;
     }
@@ -55,7 +54,7 @@ export default class Application {
 
     static instance() {
         if (!_instance) {
-            throw new AppError("APP.NOT_INSTANTIATED", {
+            throw Factory.createAppError("APP.NOT_INSTANTIATED", {
                 message: "Application instance: App is not instantiated."
             });
         }

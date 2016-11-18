@@ -1,4 +1,4 @@
-import AppError from "./AppError";
+import Factory from "./Factory";
 
 export default class Lifecycle {
     constructor(delegates, components) {
@@ -17,7 +17,7 @@ export default class Lifecycle {
             return dependenciesRoles;
         })
         .catch(err => {
-            throw new AppError("APP.BOOTRSTRAP_ERROR", {
+            throw Factory.createAppError("APP.BOOTRSTRAP_ERROR", {
                 message: "Application Bootstrap: error.",
                 originalError: err
             });
@@ -29,7 +29,7 @@ export default class Lifecycle {
         .then(() => this._shutdownDependencies())
         .then(() => this._events.fireWait("application.shutdown"))
         .catch(err => {
-            throw new AppError("APP.SHUTDOWN_ERROR", {
+            throw Factory.createAppError("APP.SHUTDOWN_ERROR", {
                 message: "Application shutdown: Application Shutdown: error.",
                 originalError: err
             });
@@ -47,7 +47,7 @@ export default class Lifecycle {
                     .addComponent({ roleName: "uncaughtErrors", value: this._uncaughtErrors });
                 resolve();
             } catch (err) {
-                reject(new AppError("APP.BOOTRSTRAP_ERROR", {
+                reject(Factory.createAppError("APP.BOOTRSTRAP_ERROR", {
                     message: "Application Bootstrap: error creating delegates.",
                     originalError: err
                 }));
@@ -61,7 +61,7 @@ export default class Lifecycle {
         });
         return this._dependenciesBuilder.build()
         .catch(err => {
-            throw new AppError("APP.BOOTRSTRAP_ERROR", {
+            throw Factory.createAppError("APP.BOOTRSTRAP_ERROR", {
                 message: "Application Bootstrap: error bootstrapping dependencies.",
                 originalError: err
             });
