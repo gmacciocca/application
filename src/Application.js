@@ -92,6 +92,6 @@ export default class Application {
     }
 
     static get configuration() {
-        return Application.instance().configuration();
+        return Application.instance().configuration;
     }
 }
